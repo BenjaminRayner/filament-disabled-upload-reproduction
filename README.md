@@ -18,8 +18,8 @@ Log in at `/admin` with `test@example.com` / `password` (local template credenti
 1. Open the seeded **Disabled upload example** record for editing. Its populated `FileUpload` is enabled and displays its normal upload prompt.
 2. Open the record's **View** page. Filament disables the same form automatically.
 3. The existing document is visible, but an empty `.filepond--drop-label` reserves approximately 67px above it. Chromium measures the total field height as 111px.
-4. Append `?workarounds=1` to the view page and reload. The drop label is hidden before FilePond initializes, reducing the field height to 44px.
-5. Open the edit page with `?workarounds=1`. The enabled upload retains its label and original height.
+4. Check **Apply CSS workaround** at the top of the view page. The checkbox adds `?workarounds=1` and reloads the page. The drop label is hidden before FilePond initializes, reducing the field height to 44px.
+5. Open the edit page and check **Apply CSS workaround**. The enabled upload retains its label and original height.
 
 Field configuration:
 
@@ -34,7 +34,7 @@ There is no custom page, custom page template, or media-library integration. The
 
 ## Workaround
 
-`public/workarounds.css` contains only the disabled-upload override. An optional panel head hook loads it when `?workarounds=1` is present. Default pages use stock Filament styles.
+`public/workarounds.css` contains only the disabled-upload override. The checkbox adds or removes `?workarounds=1`; an optional panel head hook loads the stylesheet when that flag is present. Unchecking it reloads the original styles. Default pages use stock Filament styles.
 
 Applying the override after FilePond initializes hides the label but leaves cached layout space until reinitialization. Reloading ensures the override is present during initialization.
 

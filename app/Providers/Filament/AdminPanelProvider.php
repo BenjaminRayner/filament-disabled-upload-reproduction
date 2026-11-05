@@ -2,6 +2,8 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Resources\Examples\ExampleResource;
+use Illuminate\Contracts\View\View;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -29,6 +31,11 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
+            ->renderHook(
+                PanelsRenderHook::PAGE_START,
+                fn (): View => view('filament.workaround-toggle'),
+                scopes: ExampleResource::class,
+            )
             ->renderHook(PanelsRenderHook::HEAD_END, fn (): HtmlString => new HtmlString(
                 request()->boolean('workarounds') ? '<link rel="stylesheet" href="'.asset('workarounds.css').'">' : ''
             ))
