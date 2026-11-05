@@ -1,0 +1,3 @@
+.fi-fo-file-upload .filepond--root[data-disabled]:has(.filepond--item) .filepond--drop-label {
+    display: none;
+}
